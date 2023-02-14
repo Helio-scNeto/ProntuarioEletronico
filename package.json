@@ -1,0 +1,29 @@
+{
+  "name": "prontuarioeletronico",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Helio-scNeto/ProntuarioEletronico.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Helio-scNeto/ProntuarioEletronico/issues"
+  },
+  "homepage": "https://github.com/Helio-scNeto/ProntuarioEletronico#readme",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "prisma": "^4.10.1",
+    "sucrase": "^3.29.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.10.1"
+  }
+}
