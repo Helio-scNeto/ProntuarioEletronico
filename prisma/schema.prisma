@@ -35,8 +35,8 @@ model Paciente {
   email            String @unique
   telefone         String @unique
   senha            String
-  ConfirmacaoSenha String
-  medicoId         Int    
+  confirmacaoSenha String
+  medicoId         Int
   medico           Medico @relation(fields: [medicoId], references: [id])
 
   created_at DateTime @default(now())
