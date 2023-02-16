@@ -1,22 +1,49 @@
 import { Router } from 'express';
-import MedicoCadastroController from './controllers/MedicoCadastroController';
-import PacienteCadastroController from './controllers/PacienteCadastroController';
+import MedicoAutoCadastroController from './controllers/MedicoAutoCadastroController';
+import PacienteAutoCadastroController from './controllers/PacienteAutoCadastroController';
+import MeuPacienteController from './controllers/MeuPacienteController';
 
 const router = Router();
 
 //Médico
-router.post('/cadastro-medico', MedicoCadastroController.criaMedico);
-router.get('/medicos', MedicoCadastroController.findAllMedicos);
-router.get('/medico/:id', MedicoCadastroController.findMedico);
-router.put('/medico/:id', MedicoCadastroController.updateMedico);
-router.delete('/medico/:id', MedicoCadastroController.deleteMedico);
+router.post(
+  '/cadastro-medico',
+  MedicoAutoCadastroController.criaMedico
+);
+router.get('/medicos', MedicoAutoCadastroController.findAllMedicos);
+router.get('/medico/:id', MedicoAutoCadastroController.findMedico);
+router.put('/medico/:id', MedicoAutoCadastroController.updateMedico);
+router.delete(
+  '/medico/:id',
+  MedicoAutoCadastroController.deleteMedico
+);
 
-//Paciente
-router.post('/cadastro-paciente', PacienteCadastroController.criaPaciente);
-router.get('/pacientes', PacienteCadastroController.findAllPacientes);
-router.get('/paciente/:id', PacienteCadastroController.findPaciente);
-router.put('/paciente/:id', PacienteCadastroController.updatePaciente);
-router.delete('/paciente/:id', PacienteCadastroController.deletePaciente);
+//Pacientes cadastrados pelo médico;
+router.post(
+  '/paciente/medico/:id',
+  MeuPacienteController.criaMeuPaciente
+);
 
+//Paciente Autocadastro
+router.post(
+  '/cadastro-paciente',
+  PacienteAutoCadastroController.criaPaciente
+);
+router.get(
+  '/pacientes',
+  PacienteAutoCadastroController.findAllPacientes
+);
+router.get(
+  '/paciente/:id',
+  PacienteAutoCadastroController.findPaciente
+);
+router.put(
+  '/paciente/:id',
+  PacienteAutoCadastroController.updatePaciente
+);
+router.delete(
+  '/paciente/:id',
+  PacienteAutoCadastroController.deletePaciente
+);
 
 export { router };
