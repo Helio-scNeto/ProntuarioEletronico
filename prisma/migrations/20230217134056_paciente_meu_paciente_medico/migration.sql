@@ -17,8 +17,9 @@ CREATE TABLE "MeuPaciente" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
     "nomeDaMae" TEXT NOT NULL,
-    "aniversario" DATETIME NOT NULL,
-    "inicioDosSintomas" DATETIME NOT NULL,
+    "aniversario" TEXT NOT NULL,
+    "idade" TEXT NOT NULL,
+    "inicioDosSintomas" TEXT NOT NULL,
     "comorbidades" BOOLEAN NOT NULL,
     "anamnese" TEXT NOT NULL,
     "medicoId" INTEGER NOT NULL,
@@ -54,9 +55,6 @@ CREATE UNIQUE INDEX "MeuPaciente_nome_key" ON "MeuPaciente"("nome");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_cpf_key" ON "Paciente"("cpf");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Paciente_aniversario_key" ON "Paciente"("aniversario");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_email_key" ON "Paciente"("email");

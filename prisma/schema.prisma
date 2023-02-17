@@ -27,8 +27,9 @@ model MeuPaciente {
   id                Int      @id @default(autoincrement())
   nome              String   @unique
   nomeDaMae         String
-  aniversario       DateTime
-  inicioDosSintomas DateTime
+  aniversario       String
+  idade             String
+  inicioDosSintomas String
   comorbidades      Boolean
   anamnese          String
 

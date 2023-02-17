@@ -24,6 +24,11 @@ router.post(
   MeuPacienteController.criaMeuPaciente
 );
 
+router.get(
+  '/meus-pacientes',
+  MeuPacienteController.findMeusPacientes
+);
+
 //Paciente Autocadastro
 router.post(
   '/cadastro-paciente',

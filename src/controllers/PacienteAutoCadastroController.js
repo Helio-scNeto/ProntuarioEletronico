@@ -21,7 +21,7 @@ export default {
 
       if (paciente) {
         return res.send({
-          error: `Já existe um médico com esses dados! ${cpf}`,
+          error: `Já existe um paciente cadastrado com esse CPF!`,
         });
       }
 
@@ -29,7 +29,7 @@ export default {
         data: {
           nome,
           cpf,
-          aniversario,
+          aniversario: new Date(aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')).toLocaleDateString('pt-BR'),
           estado,
           email,
           telefone,
@@ -39,7 +39,7 @@ export default {
       });
       return res.json(paciente);
     } catch (error) {
-      return res.send(`Problema ao cadastrar usuário: ${error}`);
+      return res.send(`Problema ao cadastrar usuário: ${{message: error.message}}`);
     }
   },
   async findAllPacientes(req, res) {
