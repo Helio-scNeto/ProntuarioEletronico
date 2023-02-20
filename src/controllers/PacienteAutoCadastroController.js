@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
 
 export default {
@@ -15,6 +16,14 @@ export default {
         confirmacaoSenha,
       } = req.body;
 
+      const cpfValido = new ValidaCPF(cpf);
+
+      if (!cpfValido.valida()) {
+        return res.send({
+          error: `CPF inválido! ${cpf}`,
+        });
+      }
+
       let paciente = await prisma.paciente.findUnique({
         where: { cpf: cpf },
       });
@@ -28,7 +37,7 @@ export default {
       paciente = await prisma.paciente.create({
         data: {
           nome,
-          cpf,
+          cpf: cpfValido.formatado(cpf),
           aniversario: new Date(aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')).toLocaleDateString('pt-BR'),
           estado,
           email,
@@ -39,7 +48,7 @@ export default {
       });
       return res.json(paciente);
     } catch (error) {
-      return res.send(`Problema ao cadastrar usuário: ${{message: error.message}}`);
+      return res.send(`Problema ao cadastrar usuário: ${error.message}`);
     }
   },
   async findAllPacientes(req, res) {
@@ -97,7 +106,7 @@ export default {
         data: {
           id,
           nome,
-          cpf,
+          cpf: cpfValido.formatado(cpf),
           aniversario,
           estado,
           email,

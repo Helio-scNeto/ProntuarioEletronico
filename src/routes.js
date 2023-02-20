@@ -29,6 +29,11 @@ router.get(
   MeuPacienteController.findMeusPacientes
 );
 
+router.put(
+  '/att-meu-paciente/:id',
+  MeuPacienteController.updateMeuPaciente
+);
+
 //Paciente Autocadastro
 router.post(
   '/cadastro-paciente',

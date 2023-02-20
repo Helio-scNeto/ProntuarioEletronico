@@ -26,6 +26,7 @@ export default {
         where: { nomeDaMae: nomeDaMae },
       });
 
+
       if (!medico) {
         return res.json({
           message: 'Não existe médico com estas credenciais!',
@@ -84,6 +85,46 @@ export default {
       return res.json(meusPacientes);
     } catch (error) {
       return res.send(`${error}`);
+    }
+  },
+
+  async updateMeuPaciente(req, res) {
+    const { id } = req.params;
+    const {
+      nome,
+      nomeDaMae,
+      aniversario,
+      inicioDosSintomas,
+      comorbidades,
+      anamnese,
+    } = req.body;
+
+    try {
+      const meuPaciente = await prisma.meuPaciente.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (!meuPaciente) {
+        return res.send({ message: 'Paciente inexistente!' });
+      }
+
+      await prisma.meuPaciente.update({
+        where: { id: Number(id) },
+        data: {
+          nome,
+          nomeDaMae,
+          aniversario,
+          inicioDosSintomas,
+          comorbidades,
+          anamnese,
+        },
+      });
+
+      return res.json({
+        message: `Paciente atualizado com sucesso!`,
+      });
+    } catch (error) {
+      return res.send({ message: error.message });
     }
   },
 };

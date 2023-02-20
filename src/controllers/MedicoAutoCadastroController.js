@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
 
 export default {
@@ -15,6 +16,22 @@ export default {
         confirmacaoSenha,
       } = req.body;
 
+      const cpfValido = new ValidaCPF(cpf);
+
+      if (!cpfValido.valida()) {
+        return res.send({
+          error: `CPF inválido! ${cpf}`,
+        });
+      }
+
+      if (senha !== confirmacaoSenha) {
+        return res.send({
+          error: `As senhas digitadas não coincidem!`,
+        });
+      }
+
+      
+
       let medico = await prisma.medico.findUnique({
         where: { cpf: cpf },
       });
@@ -28,7 +45,7 @@ export default {
       medico = await prisma.medico.create({
         data: {
           nome,
-          cpf,
+          cpf: cpfValido.formatado(cpf),
           crm,
           estado,
           atuacao,
@@ -122,9 +139,9 @@ export default {
           error: 'Não há médico cadastrado com esse ID!',
         });
 
-      await prisma.medico.delete({where: {id: Number(id)}});
+      await prisma.medico.delete({ where: { id: Number(id) } });
 
-      return res.send({message: "Usuário deletado!"});
+      return res.send({ message: 'Usuário deletado!' });
     } catch (error) {
       return res.send({ error });
     }
