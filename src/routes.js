@@ -2,8 +2,17 @@ import { Router } from 'express';
 import MedicoAutoCadastroController from './controllers/MedicoAutoCadastroController';
 import PacienteAutoCadastroController from './controllers/PacienteAutoCadastroController';
 import MeuPacienteController from './controllers/MeuPacienteController';
+import UserLoginController from './controllers/UserLoginController';
 
 const router = Router();
+
+const { eAdmin } = require('./middleware/auth')
+
+//login
+router.post(
+  '/login',
+  UserLoginController.Login
+);
 
 //Médico
 router.post(
@@ -25,7 +34,7 @@ router.post(
 );
 
 router.get(
-  '/meus-pacientes',
+  '/meus-pacientes',eAdmin,
   MeuPacienteController.findMeusPacientes
 );
 

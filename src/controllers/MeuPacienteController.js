@@ -82,7 +82,7 @@ export default {
           idade: true,
         },
       });
-      return res.json(meusPacientes);
+      return res.json({meusPacientes: meusPacientes, crm_logado: req.medicoCrm});
     } catch (error) {
       return res.send(`${error}`);
     }

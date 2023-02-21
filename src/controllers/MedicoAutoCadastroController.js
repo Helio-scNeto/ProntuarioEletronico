@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
+import * as bcrypt from 'bcryptjs';
+const jwt = require('jsonwebtoken');
 
 export default {
   async criaMedico(req, res) {
@@ -30,8 +32,6 @@ export default {
         });
       }
 
-      
-
       let medico = await prisma.medico.findUnique({
         where: { cpf: cpf },
       });
@@ -50,13 +50,13 @@ export default {
           estado,
           atuacao,
           email,
-          senha,
-          confirmacaoSenha,
+          senha: await bcrypt.hash(senha, 8),
+          confirmacaoSenha: await bcrypt.hash(confirmacaoSenha, 8),
         },
       });
-      return res.json(medico);
+      return res.send(medico);
     } catch (error) {
-      return res.send(`Problema ao cadastrar usuário: ${error}`);
+      return res.send(`Problema ao cadastrar médico: ${error}`);
     }
   },
   async findAllMedicos(req, res) {
