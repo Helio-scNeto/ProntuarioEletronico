@@ -18,6 +18,8 @@ model Medico {
   senha            String
   confirmacaoSenha String
 
+  estadoNome Estado @relation(fields: [estado], references: [nome])
+
   meusPacientes MeuPaciente[]
 
   created_at DateTime @default(now())
@@ -50,15 +52,19 @@ model Paciente {
   senha            String
   confirmacaoSenha String
 
+  estadoNome Estado @relation(fields: [estado], references: [nome])
+
   created_at DateTime @default(now())
 }
 
 model Estado {
-  id        Int    @id @default(autoincrement())
-  codigo_uf String @unique
-  uf        String @unique
-  nome      String @unique
-  latitude  Float  @unique
-  longitude Float  @unique
+  id        Int        @id @default(autoincrement())
+  codigo_uf Int        @unique
+  uf        String     @unique
+  nome      String     @unique
+  latitude  Float      @unique
+  longitude Float      @unique
   regiao    String
+  Medico    Medico[]
+  Paciente  Paciente[]
 }

@@ -4,12 +4,13 @@ CREATE TABLE "Medico" (
     "nome" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "crm" TEXT NOT NULL,
-    "estado" TEXT NOT NULL,
     "atuacao" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "confirmacaoSenha" TEXT NOT NULL,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "estadoNome" TEXT NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Medico_estadoNome_fkey" FOREIGN KEY ("estadoNome") REFERENCES "Estado" ("nome") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -41,6 +42,17 @@ CREATE TABLE "Paciente" (
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- CreateTable
+CREATE TABLE "Estado" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "codigo_uf" INTEGER NOT NULL,
+    "uf" TEXT NOT NULL,
+    "nome" TEXT NOT NULL,
+    "latitude" REAL NOT NULL,
+    "longitude" REAL NOT NULL,
+    "regiao" TEXT NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Medico_cpf_key" ON "Medico"("cpf");
 
@@ -61,3 +73,18 @@ CREATE UNIQUE INDEX "Paciente_email_key" ON "Paciente"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_telefone_key" ON "Paciente"("telefone");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Estado_codigo_uf_key" ON "Estado"("codigo_uf");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Estado_uf_key" ON "Estado"("uf");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Estado_nome_key" ON "Estado"("nome");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Estado_latitude_key" ON "Estado"("latitude");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Estado_longitude_key" ON "Estado"("longitude");

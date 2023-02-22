@@ -27,7 +27,7 @@ export default {
 
       if (!medico) {
         return res.json({
-          message: 'Não existe médico com estas credenciais!',
+          message: 'Acesso Negado! Apenas médico autorizado.',
         });
       }
 

@@ -3,7 +3,6 @@ import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
 import * as bcrypt from 'bcryptjs';
 
-
 export default {
   async criaMedico(req, res) {
     try {
@@ -20,7 +19,10 @@ export default {
 
       const cpfValido = new ValidaCPF(cpf);
 
-      if (!cpfValido.valida() || cpfValido.formatado(cpf).length !== 14) {
+      if (
+        !cpfValido.valida() ||
+        cpfValido.formatado(cpf).length !== 14
+      ) {
         return res.send({
           error: `CPF inválido! ${cpf}`,
         });
@@ -39,6 +41,16 @@ export default {
       if (medico) {
         return res.send({
           error: `Já existe um médico com esses dados! ${cpf}`,
+        });
+      }
+
+      let estadoEnviado = await prisma.estado.findUnique({
+        where: { nome: estado },
+      });
+
+      if (!estadoEnviado) {
+        return res.send({
+          error: `Insira um Estado válido!`,
         });
       }
 

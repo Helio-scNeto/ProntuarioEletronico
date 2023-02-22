@@ -37,6 +37,16 @@ export default {
           error: `Já existe um paciente cadastrado com esse CPF!`,
         });
       }
+      
+      let estadoEnviado = await prisma.estado.findUnique({
+        where: { nome: estado },
+      });
+
+      if (!estadoEnviado) {
+        return res.send({
+          error: `Insira um Estado válido!`,
+        });
+      }
 
       paciente = await prisma.paciente.create({
         data: {
