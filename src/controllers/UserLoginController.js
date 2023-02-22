@@ -12,23 +12,55 @@ export default {
         where: { cpf: cpf },
       });
 
-      const password_valid = await bcrypt.compare(
-        senha,
-        medico.senha
-      );
+      let paciente = await prisma.paciente.findUnique({
+        where: { cpf: cpf },
+      });
 
-      if (!cpf || !password_valid) {
-        return res.json('Campo CPF ou Senha inválido!');
+      if (medico) {
+        const password_valid = await bcrypt.compare(
+          senha,
+          medico.senha
+        );
+
+        if (!cpf || !password_valid) {
+          return res.json('Campo CPF ou Senha inválido!');
+        }
+
+        let accessToken = jwt.sign(
+          { id: Number(medico.id) },
+          'secret',
+          {
+            expiresIn: '24h',
+          }
+        );
+
+        return res.json({
+          message: `Login bem sucedido! Bem-vindo, Dr. ${medico.nome}!`,
+          token: accessToken,
+        });
       }
+      if (paciente) {
+        const password_valid = await bcrypt.compare(
+          senha,
+          paciente.senha
+        );
 
-      let accessToken = jwt.sign({ crm: medico.crm }, 'secret', {
-        expiresIn: '24h',
-      });
+        if (!cpf || !password_valid) {
+          return res.json('Campo CPF ou Senha inválido!');
+        }
 
-      return res.json({
-        message: 'Login bem sucedido!',
-        token: accessToken,
-      });
+        let accessToken = jwt.sign(
+          { id: Number(paciente.id) },
+          'secret',
+          {
+            expiresIn: '24h',
+          }
+        );
+        return res.json({
+          message: `Login bem sucedido! Bem-vindo, Paciente ${paciente.nome}!`,
+          token: accessToken,
+        });
+      }
     } catch (error) {
       return res.json(error);
     }

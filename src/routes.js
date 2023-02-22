@@ -6,13 +6,10 @@ import UserLoginController from './controllers/UserLoginController';
 
 const router = Router();
 
-const { eAdmin } = require('./middleware/auth')
+const { eAdmin } = require('./middleware/auth');
 
 //login
-router.post(
-  '/login',
-  UserLoginController.Login
-);
+router.post('/login', UserLoginController.Login);
 
 //Médico
 router.post(
@@ -29,12 +26,14 @@ router.delete(
 
 //Pacientes cadastrados pelo médico;
 router.post(
-  '/paciente/medico/:id',
+  '/add-meu-paciente',
+  eAdmin,
   MeuPacienteController.criaMeuPaciente
 );
 
 router.get(
-  '/meus-pacientes',eAdmin,
+  '/meus-pacientes',
+  eAdmin,
   MeuPacienteController.findMeusPacientes
 );
 

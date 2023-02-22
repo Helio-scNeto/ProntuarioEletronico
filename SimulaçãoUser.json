@@ -1,0 +1,34 @@
+{
+    "PacientesDeAutoCadastro": [
+        {
+            "nome": "PacientesDeAutoCadastro-1",
+            "cpf": "705487140-53",
+            "aniversario": "01/04/2000",
+            "estado": "SE",
+            "email": "hdsn213@gmail.com",
+            "telefone": "079 99999-9999",
+            "senha": "12345678",
+            "confirmacaoSenha": "12345678"
+        },
+        {
+            "nome": "PacienteDeAutoCadastro-2",
+            "cpf": "656.019.850-22",
+            "aniversario": "01/04/2000",
+            "estado": "SE",
+            "email": "hdsn214@gmail.com",
+            "telefone": "079 99999-9999",
+            "senha": "12345678",
+            "confirmacaoSenha": "12345678"
+        },
+             {
+            "nome": "PacienteDeAutoCadastro-3",
+            "cpf": "028.291.180-49",
+            "aniversario": "01/04/2000",
+            "estado": "SE",
+            "email": "hdsn215@gmail.com",
+            "telefone": "079 99999-9999",
+            "senha": "12345678",
+            "confirmacaoSenha": "12345678"
+        }
+    ]
+}

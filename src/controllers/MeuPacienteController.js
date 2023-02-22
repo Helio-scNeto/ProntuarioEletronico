@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 export default {
   async criaMeuPaciente(req, res) {
-    const { id } = req.params;
     const {
       nome,
       nomeDaMae,
@@ -15,7 +14,7 @@ export default {
 
     try {
       const medico = await prisma.medico.findUnique({
-        where: { id: Number(id) },
+        where: { id: parseInt(req.medicoId) },
       });
 
       const nomeMeuPaciente = await prisma.meuPaciente.findUnique({
@@ -25,7 +24,6 @@ export default {
       const maeDoPaciente = await prisma.meuPaciente.findMany({
         where: { nomeDaMae: nomeDaMae },
       });
-
 
       if (!medico) {
         return res.json({
@@ -76,15 +74,19 @@ export default {
   async findMeusPacientes(req, res) {
     try {
       const meusPacientes = await prisma.meuPaciente.findMany({
+        where: { medicoId: Number(req.medicoId) },
         select: {
           id: true,
           nome: true,
           idade: true,
         },
       });
-      return res.json({meusPacientes: meusPacientes, crm_logado: req.medicoCrm});
+      return res.json({
+        meusPacientes: meusPacientes,
+        id_logado: req.medicoId,
+      });
     } catch (error) {
-      return res.send(`${error}`);
+      return res.json(`${message.error}`);
     }
   },
 

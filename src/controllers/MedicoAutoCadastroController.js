@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
 import * as bcrypt from 'bcryptjs';
-const jwt = require('jsonwebtoken');
+
 
 export default {
   async criaMedico(req, res) {
@@ -20,7 +20,7 @@ export default {
 
       const cpfValido = new ValidaCPF(cpf);
 
-      if (!cpfValido.valida()) {
+      if (!cpfValido.valida() || cpfValido.formatado(cpf).length !== 14) {
         return res.send({
           error: `CPF inválido! ${cpf}`,
         });
@@ -54,7 +54,9 @@ export default {
           confirmacaoSenha: await bcrypt.hash(confirmacaoSenha, 8),
         },
       });
-      return res.send(medico);
+      return res.json({
+        message: `Cadastro bem sucedido! Bem-vindo, ${medico.nome}!`,
+      });
     } catch (error) {
       return res.send(`Problema ao cadastrar médico: ${error}`);
     }

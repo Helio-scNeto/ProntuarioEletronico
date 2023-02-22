@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import ValidaCPF from '../scripts/ValidaCPF';
 const prisma = new PrismaClient();
+import * as bcrypt from 'bcryptjs';
 
 export default {
   async criaPaciente(req, res) {
@@ -18,7 +19,10 @@ export default {
 
       const cpfValido = new ValidaCPF(cpf);
 
-      if (!cpfValido.valida()) {
+      if (
+        !cpfValido.valida() ||
+        cpfValido.formatado(cpf).length !== 14
+      ) {
         return res.send({
           error: `CPF inválido! ${cpf}`,
         });
@@ -38,17 +42,23 @@ export default {
         data: {
           nome,
           cpf: cpfValido.formatado(cpf),
-          aniversario: new Date(aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')).toLocaleDateString('pt-BR'),
+          aniversario: new Date(
+            aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')
+          ).toLocaleDateString('pt-BR'),
           estado,
           email,
           telefone,
-          senha,
-          confirmacaoSenha,
+          senha: await bcrypt.hash(senha, 8),
+          confirmacaoSenha: await bcrypt.hash(confirmacaoSenha, 8),
         },
       });
-      return res.json(paciente);
+      return res.json({
+        message: `Cadastro bem sucedido! Bem-vindo, ${paciente.nome}!`,
+      });
     } catch (error) {
-      return res.send(`Problema ao cadastrar usuário: ${error.message}`);
+      return res.send(
+        `Problema ao cadastrar paciente: ${error.message}`
+      );
     }
   },
   async findAllPacientes(req, res) {
@@ -63,13 +73,14 @@ export default {
   async findPaciente(req, res) {
     try {
       const { id } = req.params;
+
       const paciente = await prisma.paciente.findUnique({
         where: { id: Number(id) },
       });
 
       if (!paciente)
         return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
+          error: 'Não há paciente cadastrado com esse ID!',
         });
 
       return res.json(paciente);

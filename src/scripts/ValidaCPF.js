@@ -19,16 +19,11 @@ export default class ValidaCPF {
     this.novoCPF = cpfSemDigitos + digito1 + digito2;
   }
 
-  formatado(cpf) {
-    return (
-      cpf.slice(0, 3) +
-      '.' +
-      cpf.slice(3, 6) +
-      '.' +
-      cpf.slice(6, 9) +
-      '-' +
-      cpf.slice(9, 11)
-    );
+  formatado(text) {
+    const badchars = /[^\d]/g;
+    const mask = /(\d{3})(\d{3})(\d{3})(\d{2})/;
+    const cpf = new String(text).replace(badchars, '');
+    return cpf.replace(mask, '$1.$2.$3-$4');
   }
 
   static geraDigito(cpfSemDigitos) {
