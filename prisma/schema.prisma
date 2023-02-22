@@ -17,15 +17,15 @@ model Medico {
   email            String @unique
   senha            String
   confirmacaoSenha String
-  
+
   meusPacientes MeuPaciente[]
 
   created_at DateTime @default(now())
 }
 
 model MeuPaciente {
-  id                Int      @id @default(autoincrement())
-  nome              String   @unique
+  id                Int     @id @default(autoincrement())
+  nome              String  @unique
   nomeDaMae         String
   aniversario       String
   idade             String
@@ -43,7 +43,7 @@ model Paciente {
   id               Int    @id @default(autoincrement())
   nome             String
   cpf              String @unique
-  aniversario      String 
+  aniversario      String
   estado           String
   email            String @unique
   telefone         String @unique
@@ -51,4 +51,14 @@ model Paciente {
   confirmacaoSenha String
 
   created_at DateTime @default(now())
+}
+
+model Estado {
+  id        Int    @id @default(autoincrement())
+  codigo_uf String @unique
+  uf        String @unique
+  nome      String @unique
+  latitude  Float  @unique
+  longitude Float  @unique
+  regiao    String
 }

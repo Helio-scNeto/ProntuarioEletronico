@@ -5,8 +5,9 @@ import MeuPacienteController from './controllers/MeuPacienteController';
 import UserLoginController from './controllers/UserLoginController';
 
 const router = Router();
-
 const { eAdmin } = require('./middleware/auth');
+
+//Estados
 
 //login
 router.post('/login', UserLoginController.Login);
