@@ -37,6 +37,7 @@ export default {
         return res.json({
           message: `Login bem sucedido! Bem-vindo, Dr. ${medico.nome}!`,
           token: accessToken,
+          user: medico
         });
       }
       if (paciente) {
@@ -59,6 +60,7 @@ export default {
         return res.json({
           message: `Login bem sucedido! Bem-vindo, Paciente ${paciente.nome}!`,
           token: accessToken,
+          user: paciente
         });
       }
     } catch (error) {

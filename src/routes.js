@@ -3,6 +3,7 @@ import MedicoAutoCadastroController from './controllers/MedicoAutoCadastroContro
 import PacienteAutoCadastroController from './controllers/PacienteAutoCadastroController';
 import MeuPacienteController from './controllers/MeuPacienteController';
 import UserLoginController from './controllers/UserLoginController';
+import FormPacienteAutocadastroController from './controllers/FormPacienteAutocadastroController';
 
 const router = Router();
 const { eAdmin } = require('./middleware/auth');
@@ -64,5 +65,11 @@ router.delete(
   '/paciente/:id',
   PacienteAutoCadastroController.deletePaciente
 );
+
+router.post(
+  '/formClinico',eAdmin,
+  FormPacienteAutocadastroController.criaFormMeuPaciente
+);
+
 
 export { router };
