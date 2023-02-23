@@ -7,6 +7,14 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model Administrador {
+  id    Int    @id @default(autoincrement())
+  cpf   String @unique
+  senha String
+
+  created_at DateTime @default(now())
+}
+
 model Medico {
   id               Int    @id @default(autoincrement())
   nome             String
@@ -22,6 +30,7 @@ model Medico {
 
   meusPacientes MeuPaciente[]
 
+  isActive   Boolean
   created_at DateTime @default(now())
 }
 
@@ -30,7 +39,7 @@ model MeuPaciente {
   nome              String  @unique
   nomeDaMae         String
   aniversario       String
-  idade             String
+  idade             Int
   inicioDosSintomas String
   comorbidades      Boolean
   anamnese          String
@@ -55,6 +64,7 @@ model Paciente {
 
   estadoNome Estado @relation(fields: [estado], references: [nome], onUpdate: Cascade, onDelete: Cascade)
 
+  isActive Boolean
   created_at DateTime @default(now())
 }
 

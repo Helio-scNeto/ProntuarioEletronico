@@ -1,4 +1,12 @@
 -- CreateTable
+CREATE TABLE "Administrador" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "cpf" TEXT NOT NULL,
+    "senha" TEXT NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
 CREATE TABLE "Medico" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
@@ -9,6 +17,7 @@ CREATE TABLE "Medico" (
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "confirmacaoSenha" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Medico_estado_fkey" FOREIGN KEY ("estado") REFERENCES "Estado" ("nome") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -19,7 +28,7 @@ CREATE TABLE "MeuPaciente" (
     "nome" TEXT NOT NULL,
     "nomeDaMae" TEXT NOT NULL,
     "aniversario" TEXT NOT NULL,
-    "idade" TEXT NOT NULL,
+    "idade" INTEGER NOT NULL,
     "inicioDosSintomas" TEXT NOT NULL,
     "comorbidades" BOOLEAN NOT NULL,
     "anamnese" TEXT NOT NULL,
@@ -40,6 +49,7 @@ CREATE TABLE "Paciente" (
     "telefone" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "confirmacaoSenha" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Paciente_estado_fkey" FOREIGN KEY ("estado") REFERENCES "Estado" ("nome") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -66,6 +76,9 @@ CREATE TABLE "Estado" (
     "longitude" REAL NOT NULL,
     "regiao" TEXT NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Administrador_cpf_key" ON "Administrador"("cpf");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Medico_cpf_key" ON "Medico"("cpf");

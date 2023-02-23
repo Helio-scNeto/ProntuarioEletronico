@@ -26,13 +26,23 @@ export default {
         where: { cpf: cpfValidoFormatado },
       });
 
+      let superUser = await prisma.administrador.findUnique({
+        where: { cpf: cpfValidoFormatado },
+      });
+
       if (medico) {
+        if (medico.isActive === false) {
+          return res.json(
+            `Sua conta está inativa, procure a administração para mais informações!`
+          );
+        }
+
         const password_valid = await bcrypt.compare(
           senha,
           medico.senha
         );
 
-        if (!cpf || !password_valid) {
+        if (!password_valid) {
           return res.json('Campo CPF ou Senha inválido!');
         }
 
@@ -51,12 +61,17 @@ export default {
         });
       }
       if (paciente) {
+        if (paciente.isActive === false) {
+          return res.json(
+            `Sua conta está inativa, procure a administração para mais informações!`
+          );
+        }
         const password_valid = await bcrypt.compare(
           senha,
           paciente.senha
         );
 
-        if (!cpf || !password_valid) {
+        if (!password_valid) {
           return res.json('Campo CPF ou Senha inválido!');
         }
 
@@ -71,6 +86,21 @@ export default {
           message: `Login bem sucedido! Bem-vindo, Paciente ${paciente.nome}!`,
           token: accessToken,
           user: paciente,
+        });
+      }
+      if (superUser) {
+        if (!cpf) {
+          return res.json('Você não é um administrador.');
+        }
+
+        let accessToken = jwt.sign({ cpf: superUser.cpf }, 'secret', {
+          expiresIn: '24h',
+        });
+
+        return res.json({
+          message: `Login bem sucedido! Bem-vindo, Administrador ${superUser.cpf}!`,
+          token: accessToken,
+          user: superUser,
         });
       }
     } catch (error) {

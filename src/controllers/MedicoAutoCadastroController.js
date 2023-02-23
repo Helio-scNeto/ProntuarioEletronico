@@ -64,6 +64,7 @@ export default {
           email,
           senha: await bcrypt.hash(senha, 8),
           confirmacaoSenha: await bcrypt.hash(confirmacaoSenha, 8),
+          isActive: true,
         },
       });
       return res.json({
