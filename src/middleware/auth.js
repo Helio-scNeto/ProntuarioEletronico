@@ -26,6 +26,7 @@ module.exports = {
       const decode = await promisify(jwt.verify)(token, 'secret');
       req.medicoId = decode.id;
       req.pacienteId = decode.id;
+      req.admId = decode.id;
       return next();
     } catch (error) {
       res.status(400).json({

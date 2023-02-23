@@ -18,7 +18,7 @@ model Medico {
   senha            String
   confirmacaoSenha String
 
-  estadoNome Estado @relation(fields: [estado], references: [nome])
+  estadoNome Estado @relation(fields: [estado], references: [nome], onUpdate: Cascade, onDelete: Cascade)
 
   meusPacientes MeuPaciente[]
 
@@ -36,25 +36,37 @@ model MeuPaciente {
   anamnese          String
 
   medicoId Int
-  medico   Medico @relation(fields: [medicoId], references: [id])
+  medico   Medico @relation(fields: [medicoId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   created_at DateTime @default(now())
 }
 
 model Paciente {
   id               Int    @id @default(autoincrement())
-  nome             String
+  nome             String @unique
   cpf              String @unique
   aniversario      String
+  idade            Int
   estado           String
   email            String @unique
   telefone         String @unique
   senha            String
   confirmacaoSenha String
 
-  estadoNome Estado @relation(fields: [estado], references: [nome])
+  estadoNome Estado @relation(fields: [estado], references: [nome], onUpdate: Cascade, onDelete: Cascade)
 
   created_at DateTime @default(now())
+}
+
+model FormPaciente {
+  id                Int     @id @default(autoincrement())
+  nome              String  @unique
+  nomeDaMae         String
+  aniversario       String
+  idade             Int
+  inicioDosSintomas String
+  comorbidades      Boolean
+  anamnese          String
 }
 
 model Estado {

@@ -51,7 +51,7 @@ export default {
             aniversario: new Date(
               aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')
             ).toLocaleDateString('pt-BR'),
-            idade: age.toString(),
+            idade: parseInt(age),
             inicioDosSintomas: new Date(
               inicioDosSintomas.replace(/(\d+[/])(\d+[/])/, '$2$1')
             ).toLocaleDateString('pt-BR'),

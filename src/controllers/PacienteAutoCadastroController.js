@@ -48,6 +48,14 @@ export default {
         });
       }
 
+      let dob = new Date(
+        aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')
+      );
+      let month_diff = Date.now() - dob.getTime();
+      let age_dt = new Date(month_diff);
+      let year = age_dt.getUTCFullYear();
+      let age = Math.abs(year - 1970);
+
       paciente = await prisma.paciente.create({
         data: {
           nome,
@@ -55,6 +63,7 @@ export default {
           aniversario: new Date(
             aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')
           ).toLocaleDateString('pt-BR'),
+          idade: parseInt(age),
           estado,
           email,
           telefone,

@@ -4,13 +4,13 @@ CREATE TABLE "Medico" (
     "nome" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "crm" TEXT NOT NULL,
+    "estado" TEXT NOT NULL,
     "atuacao" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "confirmacaoSenha" TEXT NOT NULL,
-    "estadoNome" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Medico_estadoNome_fkey" FOREIGN KEY ("estadoNome") REFERENCES "Estado" ("nome") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Medico_estado_fkey" FOREIGN KEY ("estado") REFERENCES "Estado" ("nome") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -25,7 +25,7 @@ CREATE TABLE "MeuPaciente" (
     "anamnese" TEXT NOT NULL,
     "medicoId" INTEGER NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "MeuPaciente_medicoId_fkey" FOREIGN KEY ("medicoId") REFERENCES "Medico" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "MeuPaciente_medicoId_fkey" FOREIGN KEY ("medicoId") REFERENCES "Medico" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -34,12 +34,26 @@ CREATE TABLE "Paciente" (
     "nome" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "aniversario" TEXT NOT NULL,
+    "idade" INTEGER NOT NULL,
     "estado" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "telefone" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
     "confirmacaoSenha" TEXT NOT NULL,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Paciente_estado_fkey" FOREIGN KEY ("estado") REFERENCES "Estado" ("nome") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "FormPaciente" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT NOT NULL,
+    "nomeDaMae" TEXT NOT NULL,
+    "aniversario" TEXT NOT NULL,
+    "idade" INTEGER NOT NULL,
+    "inicioDosSintomas" TEXT NOT NULL,
+    "comorbidades" BOOLEAN NOT NULL,
+    "anamnese" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -66,6 +80,9 @@ CREATE UNIQUE INDEX "Medico_email_key" ON "Medico"("email");
 CREATE UNIQUE INDEX "MeuPaciente_nome_key" ON "MeuPaciente"("nome");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Paciente_nome_key" ON "Paciente"("nome");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Paciente_cpf_key" ON "Paciente"("cpf");
 
 -- CreateIndex
@@ -73,6 +90,9 @@ CREATE UNIQUE INDEX "Paciente_email_key" ON "Paciente"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_telefone_key" ON "Paciente"("telefone");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FormPaciente_nome_key" ON "FormPaciente"("nome");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Estado_codigo_uf_key" ON "Estado"("codigo_uf");

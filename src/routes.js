@@ -3,7 +3,7 @@ import MedicoAutoCadastroController from './controllers/MedicoAutoCadastroContro
 import PacienteAutoCadastroController from './controllers/PacienteAutoCadastroController';
 import MeuPacienteController from './controllers/MeuPacienteController';
 import UserLoginController from './controllers/UserLoginController';
-import FormPacienteAutocadastroController from './controllers/FormPacienteAutocadastroController';
+import FormPacienteController from './controllers/FormPacienteController';
 
 const router = Router();
 const { eAdmin } = require('./middleware/auth');
@@ -11,20 +11,14 @@ const { eAdmin } = require('./middleware/auth');
 //Estados
 
 //login
-router.post('/login', UserLoginController.Login);
+
 
 //Médico
 router.post(
   '/cadastro-medico',
   MedicoAutoCadastroController.criaMedico
 );
-router.get('/medicos', MedicoAutoCadastroController.findAllMedicos);
-router.get('/medico/:id', MedicoAutoCadastroController.findMedico);
-router.put('/medico/:id', MedicoAutoCadastroController.updateMedico);
-router.delete(
-  '/medico/:id',
-  MedicoAutoCadastroController.deleteMedico
-);
+
 
 //Pacientes cadastrados pelo médico;
 router.post(
@@ -68,7 +62,7 @@ router.delete(
 
 router.post(
   '/formClinico',eAdmin,
-  FormPacienteAutocadastroController.criaFormMeuPaciente
+  FormPacienteController.criaFormMeuPaciente
 );
 
 
