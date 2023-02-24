@@ -9,15 +9,15 @@ Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz d
 </ol>
 
 <hr>
-Feito os passos anteriores, a primeira ação que deve ser feita é a importação dos estados do 'file.csv' disponível. 
-
-1: Acesse: http://localhost:3000/estados no Postman ou similar, utilizando método POST
-
-2. Use a raiz do projeto o mova o file.csv pra dentro do repositório atual do Postman
-
-3: No body da requisição form-data ou similar o envio de arquivo, selecione o file.csv no diretório com key 'file', sem as aspas.
+<h6>Feito os passos anteriores, a primeira ação que deve ser feita é a importação dos estados do 'file.csv' disponível. </h6>
+ <ul>
+     <li>Acesse: http://localhost:3000/estados no Postman ou similar, utilizando método POST</li>
+     <li>Use a raiz do projeto o mova o file.csv pra dentro do repositório atual do Postman</li>
+     <li>No body da requisição form-data ou similar o envio de arquivo, selecione o file.csv no diretório com key 'file', sem as aspas.</li>
+ </ul>
 
 4: Se bem sucedido a rota deve retornar um array contendo os objetos do modelo Estado.
+
 <hr>
 <p>O primeiro Administrador (Superusuário do sistema) deve ser inserido manualmente no banco de dados ou através do terminal, com os campos CPF e Senha.</p>
 
@@ -41,8 +41,8 @@ PUT http://localhost:3000/admin/inativar-medico/':id' - mudar status de atividad
 
 PUT http://localhost:3000/admin/inativar-medico/':id' - mudar status de atividade um paciente (muda ':id' pelo número de id do paciente desejado)
 
-GET http://localhost:3000/admin/transparencia - visualizar total de médicos 
-cadastrados, total de pacientes cadastrados no autocadastro, total de pacientes 
+GET http://localhost:3000/admin/transparencia - visualizar total de médicos
+cadastrados, total de pacientes cadastrados no autocadastro, total de pacientes
 cadastrados por médicos e total de médicos ativo/inativo.
 
 <h2>Autocadastro</h2>
@@ -62,5 +62,3 @@ GET http://localhost:3000/medico/lista-meus-pacientes - Lista de pacientes, requ
 
 <h2>Paciente</h2>
 POST http://localhost:3000/paciente/formClinico - Formulário clínico, requer login do paciente (token)
-
-
