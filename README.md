@@ -17,9 +17,11 @@ Feito os passos anteriores, a primeira ação que deve ser feita é a importaç�
 
 4: Se bem sucedido a rota deve retornar um array contendo os objetos do modelo Estado.
 <hr>
-O primeiro Administrador (Superusuário do sistema) deve ser feito via terminal ou deve ser inserido manualmente no banco de dados, com os campos CPF e Senha.
+<p>O primeiro Administrador (Superusuário do sistema) deve ser inserido manualmente no banco de dados ou através do terminal, com os campos CPF e Senha.</p>
 
-<p>Na raiz do projeto, o arquivo <strong>SimulaçãoUser.json</strong> contém uma sugestão de Administrador, assim como da pacientes, médicos e respostas dos formulário mas sinta-se livre pra utilizar o CPF que desejar, desde que seja válido, ou o sistema não permitirá a criação. </p>
+<p>Sinta-se livre pra utilizar o CPF que desejar, desde que seja válido, ou o sistema não permitirá a criação.</p>
+
+<p>Na raiz do projeto, o arquivo <strong>SimulaçãoUser.json</strong> contém uma sugestão de Administrador, assim como de pacientes e médicos do autocadastro, e respostas para os formulários clínicos</p>
 
 <h2>Administração</h2>
 
