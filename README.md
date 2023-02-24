@@ -21,7 +21,8 @@ Na raiz do projeto, o arquivo SimulaçãoUser.json contém uma sugestão de Admi
 Feito a criação do primeiro do primeiro Administrador, acesse:
 
 <h2>Administração</h2>
-<Strong>Todas as rotas abaixo necessitam de login do administrador (Token)</Strong>
+
+<Strong align='center'>Todas as rotas abaixo necessitam de login do administrador (Token)</Strong>
 
 GET http://localhost:3000/admin - pra gerar novos administradores automáticamente.
 
