@@ -3,9 +3,9 @@
 Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz do projeto, sem as aspas:
 
 <ol>
-    <li>1.'npm install'(instalar todas as dependências necessárias)</li>
-    <li>2.'npx prisma migrate dev' (aplicar o esquema feito no prisma ao banco de dados)</li>
-    <li>3.'npm run dev' (para de inicializar o servidor)</li>
+    <li>'npm install'(instalar todas as dependências necessárias)</li>
+    <li>'npx prisma migrate dev' (aplicar o esquema feito no prisma ao banco de dados)</li>
+    <li>'npm run dev' (para de inicializar o servidor)</li>
 </ol>
 
 <hr>
