@@ -58,7 +58,7 @@ model Paciente {
   idade            Int
   estado           String
   email            String @unique
-  telefone         String @unique
+  telefone         String 
   senha            String
   confirmacaoSenha String
 

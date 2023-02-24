@@ -46,13 +46,9 @@ export default {
           return res.json('Campo CPF ou Senha inválido!');
         }
 
-        let accessToken = jwt.sign(
-          { id: Number(medico.id) },
-          'secret',
-          {
-            expiresIn: '24h',
-          }
-        );
+        let accessToken = jwt.sign({ id: medico.id, cpf: medico.cpf }, 'secret', {
+          expiresIn: '24h',
+        });
 
         return res.json({
           message: `Login bem sucedido! Bem-vindo, Dr. ${medico.nome}!`,
@@ -76,7 +72,7 @@ export default {
         }
 
         let accessToken = jwt.sign(
-          { id: Number(paciente.id) },
+          { cpf: paciente.cpf, id: paciente.id },
           'secret',
           {
             expiresIn: '24h',

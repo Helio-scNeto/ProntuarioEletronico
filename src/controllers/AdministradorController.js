@@ -5,6 +5,9 @@ const prisma = new PrismaClient();
 export default {
   async criaAdm(req, res) {
     try {
+      if (!req.admCpf) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
       const gera = new GeraCPF();
       let cpfGerado = gera.geraNovoCpf();
       const senha = Math.random().toString(36).slice(-6);
@@ -27,6 +30,14 @@ export default {
   async ativaMedico(req, res) {
     const { id } = req.params;
     try {
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
+      });
+
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
+
       const medico = await prisma.medico.update({
         where: { id: parseInt(id) },
         data: { isActive: true },
@@ -41,6 +52,14 @@ export default {
   async inativaMedico(req, res) {
     const { id } = req.params;
     try {
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
+      });
+
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
+
       const medico = await prisma.medico.update({
         where: { id: parseInt(id) },
         data: { isActive: false },
@@ -56,6 +75,13 @@ export default {
   async ativaPaciente(req, res) {
     const { id } = req.params;
     try {
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
+      });
+
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
       const paciente = await prisma.paciente.update({
         where: { id: parseInt(id) },
         data: { isActive: true },
@@ -70,6 +96,13 @@ export default {
   async inativaPaciente(req, res) {
     const { id } = req.params;
     try {
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
+      });
+
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
       const paciente = await prisma.paciente.update({
         where: { id: parseInt(id) },
         data: { isActive: false },
@@ -84,25 +117,39 @@ export default {
   },
   async transparencia(req, res) {
     try {
-      const medicos = await prisma.medico.findMany();
-      const pacientes = await prisma.paciente.findMany();
-      const meusPacientes = await prisma.meuPaciente.findMany();
-      let ativos = 0;
-      let inativos = 0;
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
+      });
 
-      for (let i = 0; i <= medicos.length; i++) {
-        medicos.isActive === true ? ativos++ : inativos++;
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
       }
 
+      const totalMedicosCadastrados = await prisma.medico.count();
+
+      const totalPacientesAutoCadastro =
+        await prisma.paciente.count();
+
+      const totalPacientesCadastradosPorMedicos =
+        await prisma.meuPaciente.count();
+
+      const totalMedicosAtivos = await prisma.medico.count({
+        where: { isActive: true },
+      });
+      const totalMedicosInativos = await prisma.medico.count({
+        where: { isActive: false },
+      });
+
       return res.json({
-        medicos: medicos.length,
-        pacientesAutoCadastro: pacientes.length,
-        pacientesCadastradosPorMedicos: meusPacientes.length,
-        medicosAtivos: ativos,
-        pacientesInativos: inativos,
+        MedicosCadastrados: totalMedicosCadastrados,
+        pacientesAutoCadastro: totalPacientesAutoCadastro,
+        PacientesCadastradosPorMedicos:
+          totalPacientesCadastradosPorMedicos,
+        medicosAtivos: totalMedicosAtivos,
+        medicosInativos: totalMedicosInativos,
       });
     } catch (error) {
-      res.send(error);
+      res.send({ message: error.message });
     }
   },
 };

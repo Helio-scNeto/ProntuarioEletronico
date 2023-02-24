@@ -74,89 +74,22 @@ export default {
       return res.send(`Problema ao cadastrar médico: ${error}`);
     }
   },
-  async findAllMedicos(req, res) {
+  async listaMedicos(req, res) {
     try {
-      const medicos = await prisma.medico.findMany();
-      return res.json(medicos);
-    } catch (error) {
-      return res.send({ error });
-    }
-  },
-
-  async findMedico(req, res) {
-    try {
-      const { id } = req.params;
-      const medico = await prisma.medico.findUnique({
-        where: { id: Number(id) },
+      const superUser = await prisma.administrador.findUnique({
+        where: { cpf: req.admCpf },
       });
+      if (!superUser) {
+        return res.json(`Essa rota é restrita a administradores!`);
+      }
 
-      if (!medico)
-        return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
-        });
-
-      return res.json(medico);
-    } catch (error) {
-      return res.send({ error });
-    }
-  },
-  async updateMedico(req, res) {
-    try {
-      const { id } = req.params;
-
-      const {
-        nome,
-        cpf,
-        crm,
-        estado,
-        atuacao,
-        email,
-        senha,
-        confirmacaoSenha,
-      } = req.body;
-
-      let medico = await prisma.medico.findUnique({
-        where: { id: Number(id) },
-      });
-
-      if (!medico)
-        return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
-        });
-
-      medico = await prisma.medico.update({
-        where: { id: Number(id) },
-        data: {
-          nome,
-          cpf,
-          crm,
-          estado,
-          atuacao,
-          email,
-          senha,
-          confirmacaoSenha,
+      const medicos = await prisma.medico.findMany({
+        select: {
+          nome: true,
+          email: true,
         },
       });
-      return res.json(medico);
-    } catch (error) {
-      return res.json({ error });
-    }
-  },
-  async deleteMedico(req, res) {
-    try {
-      const { id } = req.params;
-      const medico = await prisma.medico.findUnique({
-        where: { id: Number(id) },
-      });
-
-      if (!medico)
-        return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
-        });
-
-      await prisma.medico.delete({ where: { id: Number(id) } });
-
-      return res.send({ message: 'Usuário deletado!' });
+      return res.json(medicos);
     } catch (error) {
       return res.send({ error });
     }

@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 export default {
   async criaMeuPaciente(req, res) {
-    const {
+    let {
       nome,
       nomeDaMae,
       aniversario,
@@ -14,8 +14,12 @@ export default {
 
     try {
       const medico = await prisma.medico.findUnique({
-        where: { id: parseInt(req.medicoId) },
+        where: { cpf: req.medicoCpf },
       });
+
+      if (!medico) {
+        return res.json(`Essa rota é restrita a Médicos!`);
+      }
 
       const nomeMeuPaciente = await prisma.meuPaciente.findUnique({
         where: { nome: nome },
@@ -24,12 +28,6 @@ export default {
       const maeDoPaciente = await prisma.meuPaciente.findMany({
         where: { nomeDaMae: nomeDaMae },
       });
-
-      if (!medico) {
-        return res.json({
-          message: 'Acesso Negado! Apenas médico autorizado.',
-        });
-      }
 
       if (nomeMeuPaciente === nome && maeDoPaciente === nomeDaMae) {
         return res.json({
@@ -43,6 +41,13 @@ export default {
         let age_dt = new Date(month_diff);
         let year = age_dt.getUTCFullYear();
         let age = Math.abs(year - 1970);
+
+        if (comorbidades == 'Sim') {
+          comorbidades = true;
+        }
+        if (comorbidades == 'Não') {
+          comorbidades = false;
+        }
 
         const meuPaciente = await prisma.meuPaciente.create({
           data: {
@@ -71,8 +76,16 @@ export default {
       );
     }
   },
-  async findMeusPacientes(req, res) {
+  async listaMeusPacientes(req, res) {
     try {
+      const medico = await prisma.medico.findUnique({
+        where: { cpf: req.medicoCpf },
+      });
+
+      if (!medico) {
+        return res.json(`Essa rota é restrita a Médicos!`);
+      }
+
       const meusPacientes = await prisma.meuPaciente.findMany({
         where: { medicoId: Number(req.medicoId) },
         select: {
@@ -83,10 +96,9 @@ export default {
       });
       return res.json({
         meusPacientes: meusPacientes,
-        id_logado: req.medicoId,
       });
     } catch (error) {
-      return res.json(`${message.error}`);
+      return res.json(error);
     }
   },
 

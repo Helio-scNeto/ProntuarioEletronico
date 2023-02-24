@@ -17,13 +17,15 @@ module.exports = {
       res.status(400).json({
         erro: true,
         message:
-          'Erro: Necessárior realizar o login para acessar a página! {Missed AccessToken}',
+          'Erro: Necessárior realizar o login para acessar a página! {Missed AccessToken?}',
       });
     }
     try {
       const decode = await promisify(jwt.verify)(token, 'secret');
+      req.medicoCpf = decode.cpf;
       req.medicoId = decode.id;
-      req.pacienteId = decode.id;
+      req.pacienteCpf = decode.cpf;
+      req.pacienteId = decode.id
       req.admCpf = decode.cpf;
       return next();
     } catch (error) {

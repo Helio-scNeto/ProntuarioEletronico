@@ -13,20 +13,16 @@ medRouter.post(
 
 //Pacientes cadastrados pelo médico;
 medRouter.post(
-  '/add-meu-paciente',
+  '/medico/add-meu-paciente',
   eAdmin,
   MeuPacienteController.criaMeuPaciente
 );
 
 medRouter.get(
-  '/meus-pacientes',
+  '/medico/lista-meus-pacientes',
   eAdmin,
-  MeuPacienteController.findMeusPacientes
+  MeuPacienteController.listaMeusPacientes
 );
 
-medRouter.put(
-  '/att-meu-paciente/:id',
-  MeuPacienteController.updateMeuPaciente
-);
 
 export { medRouter };

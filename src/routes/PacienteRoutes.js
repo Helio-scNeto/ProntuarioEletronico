@@ -9,25 +9,9 @@ pacienteRouter.post(
   '/cadastro-paciente',
   PacienteAutoCadastroController.criaPaciente
 );
-pacienteRouter.get(
-  '/pacientes',
-  PacienteAutoCadastroController.findAllPacientes
-);
-pacienteRouter.get(
-  '/paciente/:id',
-  PacienteAutoCadastroController.findPaciente
-);
-pacienteRouter.put(
-  '/paciente/:id',
-  PacienteAutoCadastroController.updatePaciente
-);
-pacienteRouter.delete(
-  '/paciente/:id',
-  PacienteAutoCadastroController.deletePaciente
-);
 
 pacienteRouter.post(
-  '/formClinico',
+  '/paciente/formClinico',
   eAdmin,
   FormPacienteController.criaFormMeuPaciente
 );

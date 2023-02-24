@@ -37,7 +37,7 @@ export default {
           error: `Já existe um paciente cadastrado com esse CPF!`,
         });
       }
-      
+
       let estadoEnviado = await prisma.estado.findUnique({
         where: { nome: estado },
       });
@@ -54,7 +54,11 @@ export default {
       let month_diff = Date.now() - dob.getTime();
       let age_dt = new Date(month_diff);
       let year = age_dt.getUTCFullYear();
-      let age = Math.abs(year - 1970);
+      let age = parseInt(Math.abs(year - 1970));
+
+      if (age < 18) {
+        return res.json('Paciente deve ter mais de 18 anos!');
+      }
 
       paciente = await prisma.paciente.create({
         data: {
@@ -81,91 +85,22 @@ export default {
       );
     }
   },
-  async findAllPacientes(req, res) {
-    try {
-      const pacientes = await prisma.paciente.findMany();
-      return res.json(pacientes);
-    } catch (error) {
-      return res.send({ error });
+  async listaPacientes(req, res) {
+    const superUser = await prisma.administrador.findUnique({
+      where: { cpf: req.admCpf },
+    });
+
+    if (!superUser) {
+      return res.json(`Essa rota é restrita a administradores!`);
     }
-  },
-
-  async findPaciente(req, res) {
     try {
-      const { id } = req.params;
-
-      const paciente = await prisma.paciente.findUnique({
-        where: { id: Number(id) },
-      });
-
-      if (!paciente)
-        return res.send({
-          error: 'Não há paciente cadastrado com esse ID!',
-        });
-
-      return res.json(paciente);
-    } catch (error) {
-      return res.send({ error });
-    }
-  },
-  async updatePaciente(req, res) {
-    try {
-      const { id } = req.params;
-
-      const {
-        nome,
-        cpf,
-        aniversario,
-        estado,
-        email,
-        telefone,
-        senha,
-        confirmacaoSenha,
-      } = req.body;
-
-      let paciente = await prisma.paciente.findUnique({
-        where: { id: Number(id) },
-      });
-
-      if (!paciente)
-        return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
-        });
-
-      paciente = await prisma.paciente.update({
-        where: { id: Number(id) },
-        data: {
-          id,
-          nome,
-          cpf: cpfValido.formatado(cpf),
-          aniversario,
-          estado,
-          email,
-          telefone,
-          senha,
-          confirmacaoSenha,
+      const pacientes = await prisma.paciente.findMany({
+        select: {
+          nome: true,
+          email: true,
         },
       });
-      return res.json(paciente);
-    } catch (error) {
-      return res.json({ error });
-    }
-  },
-  async deletePaciente(req, res) {
-    try {
-      const { id } = req.params;
-      const paciente = await prisma.paciente.findUnique({
-        where: { id: Number(id) },
-      });
-
-      if (!paciente)
-        return res.send({
-          error: 'Não há médico cadastrado com esse ID!',
-        });
-
-      await prisma.paciente.delete({ where: { id: Number(id) } });
-
-      return res.send({ message: 'Usuário deletado!' });
+      return res.json(pacientes);
     } catch (error) {
       return res.send({ error });
     }

@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import AdministradorController from '../controllers/AdministradorController';
 import MedicoAutoCadastroController from '../controllers/MedicoAutoCadastroController';
+import PacienteAutoCadastroController from '../controllers/PacienteAutoCadastroController';
 
 const adminRouter = Router();
 const { eAdmin } = require('../middleware/auth');
 
-adminRouter.get('/admin', AdministradorController.criaAdm);
+adminRouter.get('/admin', eAdmin, AdministradorController.criaAdm);
 
 adminRouter.get(
   '/admin/transparencia',
@@ -17,7 +18,13 @@ adminRouter.get(
 adminRouter.get(
   '/admin/medicos',
   eAdmin,
-  MedicoAutoCadastroController.findAllMedicos
+  MedicoAutoCadastroController.listaMedicos
+);
+
+//Pacientes
+adminRouter.get(
+  '/admin/pacientes',eAdmin,
+  PacienteAutoCadastroController.listaPacientes
 );
 
 //Ativação/Desativação médicos
@@ -31,6 +38,8 @@ adminRouter.put(
   eAdmin,
   AdministradorController.inativaMedico
 );
+
+//Ativação/Desativação pacientes
 adminRouter.put(
   '/admin/ativar-paciente/:id',
   eAdmin,
@@ -40,19 +49,6 @@ adminRouter.put(
   '/admin/inativar-paciente/:id',
   eAdmin,
   AdministradorController.inativaPaciente
-);
-
-adminRouter.get(
-  '/medico/:id',
-  MedicoAutoCadastroController.findMedico
-);
-adminRouter.put(
-  '/medico/:id',
-  MedicoAutoCadastroController.updateMedico
-);
-adminRouter.delete(
-  '/medico/:id',
-  MedicoAutoCadastroController.deleteMedico
 );
 
 export { adminRouter };

@@ -1,17 +1,11 @@
 import { Readable } from 'stream';
-import { Router } from 'express';
-import multer from 'multer';
+
 import readline from 'readline';
 import { PrismaClient } from '@prisma/client';
 
-const estadosRouter = Router();
-const prisma = new PrismaClient();
-const multerConfig = multer();
-
-estadosRouter.post(
-  '/estados',
-  multerConfig.single('file'),
-  async (req, res) => {
+export default {
+  async importaEstados(req, res) {
+    const prisma = new PrismaClient();
     const { file } = req;
     const { buffer } = file;
 
@@ -38,7 +32,6 @@ estadosRouter.post(
         });
       }
       estados.shift();
-      console.log(estados);
       for await (let {
         codigo_uf,
         uf,
@@ -55,7 +48,5 @@ estadosRouter.post(
     } catch (error) {
       return res.json({ error: error.message });
     }
-  }
-);
-
-export { estadosRouter };
+  },
+};

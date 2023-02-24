@@ -1,34 +1,188 @@
 {
-    "PacientesDeAutoCadastro": [
-        {
-            "nome": "PacientesDeAutoCadastro-1",
-            "cpf": "705487140-53",
-            "aniversario": "01/04/2000",
-            "estado": "SE",
-            "email": "hdsn213@gmail.com",
-            "telefone": "079 99999-9999",
-            "senha": "12345678",
-            "confirmacaoSenha": "12345678"
-        },
-        {
-            "nome": "PacienteDeAutoCadastro-2",
-            "cpf": "656.019.850-22",
-            "aniversario": "01/04/2000",
-            "estado": "SE",
-            "email": "hdsn214@gmail.com",
-            "telefone": "079 99999-9999",
-            "senha": "12345678",
-            "confirmacaoSenha": "12345678"
-        },
-             {
-            "nome": "PacienteDeAutoCadastro-3",
-            "cpf": "028.291.180-49",
-            "aniversario": "01/04/2000",
-            "estado": "SE",
-            "email": "hdsn215@gmail.com",
-            "telefone": "079 99999-9999",
-            "senha": "12345678",
-            "confirmacaoSenha": "12345678"
-        }
-    ]
+  "Administrador": [{ "cpf": "793.309.160-15", "senha": "2eyotq" }],
+  "Médicos": [
+    {
+      "nome": "Médico 1",
+      "cpf": "779.153.340-50",
+      "crm": "79142",
+      "estado": "São Paulo",
+      "atuacao": "Pediatria",
+      "email": "Medico-1@mail.com",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "Médico 2",
+      "cpf": "007.070.230-68",
+      "crm": "10379",
+      "estado": "Minas Gerais",
+      "atuacao": "Cardiologia",
+      "email": "Medico-2@mail.com",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "Médico 3",
+      "cpf": "179.618.970-70",
+      "crm": "50267",
+      "estado": "Rio de Janeiro",
+      "atuacao": "Dermatologia",
+      "email": "Medico-3@mail.com",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "Médico 4",
+      "cpf": "177.933.610-16",
+      "crm": "91504",
+      "estado": "Bahia",
+      "atuacao": "Ortopedia",
+      "email": "Medico-4@mail.com",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "Médico 5",
+      "cpf": "517.802.955-73",
+      "crm": "42058",
+      "estado": "Paraná",
+      "atuacao": "Ginecologia",
+      "email": "Medico-5@mail.com",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    }
+  ],
+  "MeuPaciente": [
+    {
+      "nome": "PacienteA",
+      "nomeDaMae": "MãeDoPacienteA",
+      "aniversario": "15/05/1995",
+      "inicioDosSintomas": "20/02/2023",
+      "comorbidades": "Não",
+      "anamnese": "O paciente apresenta febre, tosse, coriza, dor de cabeça, dor no corpo e mal-estar geral. Também será perguntado sobre a duração dos sintomas e se houve contato recente com outras pessoas com gripe."
+    },
+
+    {
+      "nome": "PacienteB",
+      "nomeDaMae": "MãeDoPacienteB",
+      "aniversario": "28/11/1980",
+      "inicioDosSintomas": "10/02/2023",
+      "comorbidades": "Sim - Diabetes",
+      "anamnese": "O paciente apresenta febre, tosse, coriza, dor de cabeça, dor no corpo e mal-estar geral. Também será perguntado sobre a duração dos sintomas e se houve contato recente com outras pessoas com gripe."
+    },
+
+    {
+      "nome": "PacienteC",
+      "nomeDaMae": "MãeDoPacienteC",
+      "aniversario": "03/06/1972",
+      "inicioDosSintomas": "18/02/2023",
+      "comorbidades": "Sim - Hipertensão",
+      "anamnese": "O paciente apresenta febre, tosse, coriza, dor de cabeça, dor no corpo e mal-estar geral. Também será perguntado sobre a duração dos sintomas e se houve contato recente com outras pessoas com gripe."
+    },
+
+    {
+      "nome": "PacienteD",
+      "nomeDaMae": "MãeDoPacienteD",
+      "aniversario": "10/01/2005",
+      "inicioDosSintomas": "25/02/2023",
+      "comorbidades": "Não",
+      "anamnese": "O paciente apresenta febre, tosse, coriza, dor de cabeça, dor no corpo e mal-estar geral. Também será perguntado sobre a duração dos sintomas e se houve contato recente com outras pessoas com gripe."
+    },
+    {
+      "nome": "PacienteE",
+      "nomeDaMae": "MãeDoPacienteE",
+      "aniversario": "10/01/2003",
+      "inicioDosSintomas": "25/02/2023",
+      "comorbidades": "Não",
+      "anamnese": "O paciente apresenta febre, tosse, coriza, dor de cabeça, dor no corpo e mal-estar geral. Também será perguntado sobre a duração dos sintomas e se houve contato recente com outras pessoas com gripe."
+    }
+  ],
+  "PacientesDeAutoCadastro": [
+    {
+      "nome": "PacientesDeAutoCadastro-1",
+      "cpf": "705487140-53",
+      "aniversario": "01/04/2000",
+      "estado": "SE",
+      "email": "hdsn213@gmail.com",
+      "telefone": "079 99999-9999",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "PacienteDeAutoCadastro-2",
+      "cpf": "656.019.850-22",
+      "aniversario": "01/08/1995",
+      "estado": "Sergipe",
+      "email": "hdsn214@gmail.com",
+      "telefone": "079 99999-9999",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "PacientesDeAutoCadastro-3",
+      "cpf": "172.751.680-06",
+      "aniversario": "03/08/2005",
+      "estado": "Paraná",
+      "email": "Paciente-1@mail.com",
+      "telefone": "(41) 99999-9999",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "PacientesDeAutoCadastro-4",
+      "cpf": "237.441.820-02",
+      "aniversario": "09/01/2004",
+      "estado": "Rio Grande do Sul",
+      "email": "Paciente-3@mail.com",
+      "telefone": "(51) 99999-9999",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    },
+    {
+      "nome": "PacientesDeAutoCadastro-5",
+      "cpf": "514.382.520-21",
+      "aniversario": "15/06/2001",
+      "estado": "Amazonas",
+      "email": "Paciente-5@mail.com",
+      "telefone": "(92) 99999-9999",
+      "senha": "12345678",
+      "confirmacaoSenha": "12345678"
+    }
+  ],
+  "formularioPacienteAutoCad": [
+    {
+      "nomeDaMae": "Maria",
+      "inicioDosSintomas": "12/03/2023",
+      "comorbidades": "Não",
+      "anamnese": "dor abdominal, diarreia, náusea e vômito."
+    },
+
+    {
+      "nomeDaMae": "Ana",
+      "inicioDosSintomas": "28/07/2022",
+      "comorbidades": "Sim",
+      "anamnese": "dor no peito, falta de ar e fadiga."
+    },
+
+    {
+      "nomeDaMae": "Carla",
+      "inicioDosSintomas": "02/09/2022",
+      "comorbidades": "Não",
+      "anamnese": "dor de garganta, rouquidão, tosse seca e febre baixa."
+    },
+
+    {
+      "nomeDaMae": "Julia",
+      "inicioDosSintomas": "24/02/2023",
+      "comorbidades": "Não",
+      "anamnese": "dor nas articulações, coceira, inchaço e vermelhidão na pele."
+    },
+
+    {
+      "nomeDaMae": "Lucia",
+      "inicioDosSintomas": "01/01/2023",
+      "comorbidades": "Sim",
+      "anamnese": "dor de cabeça intensa, náusea, vômito e sensibilidade à luz."
+    }
+  ]
 }
