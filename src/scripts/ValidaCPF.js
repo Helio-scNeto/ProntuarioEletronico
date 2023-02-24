@@ -49,6 +49,3 @@ export default class ValidaCPF {
     return this.novoCPF === this.cpfLimpo;
   }
 }
-
-const cpfvalido = new ValidaCPF('961.185.240-61')
-console.log(cpfvalido.valida())

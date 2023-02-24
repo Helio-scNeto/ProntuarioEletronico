@@ -22,17 +22,24 @@ export default {
       }
 
       const nomeMeuPaciente = await prisma.meuPaciente.findUnique({
+        select:{
+          nome: true
+        },
         where: { nome: nome },
       });
 
       const maeDoPaciente = await prisma.meuPaciente.findMany({
+        select:{
+          nomeDaMae: true
+        },
         where: { nomeDaMae: nomeDaMae },
       });
 
-      if (nomeMeuPaciente === nome && maeDoPaciente === nomeDaMae) {
+      if (nomeMeuPaciente && maeDoPaciente) {
         return res.json({
           message: 'Você já inseriu esse paciente!',
         });
+
       } else {
         let dob = new Date(
           aniversario.replace(/(\d+[/])(\d+[/])/, '$2$1')

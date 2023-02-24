@@ -43,7 +43,7 @@ export default {
         data: { isActive: true },
       });
       if (medico.isActive === true) {
-        res.send(`Paciente ativado com sucesso!`);
+        res.send(`Medico ativado com sucesso!`);
       }
     } catch (error) {
       res.status(500).send(error);
@@ -65,7 +65,7 @@ export default {
         data: { isActive: false },
       });
       if (medico.isActive === false) {
-        res.send(`Paciente inativado com sucesso!`);
+        res.send(`Médico inativado com sucesso!`);
       }
     } catch (error) {
       res.status(500).send(error);

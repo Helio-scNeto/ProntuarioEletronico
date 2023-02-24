@@ -44,7 +44,7 @@ export default {
           comorbidades = false;
         }
 
-        const formPacienteAutoCad = await prisma.formPaciente.create({
+         await prisma.formPaciente.create({
           data: {
             nome: paciente.nome,
             nomeDaMae,
