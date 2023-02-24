@@ -21,24 +21,42 @@ Na raiz do projeto, o arquivo SimulaçãoUser.json contém uma sugestão de Admi
 Feito a criação do primeiro do primeiro Administrador, acesse:
 
 <h2>Administração</h2>
-1. GET http://localhost:3000/admin - pra gerar novos administradores automáticamente.
+<Strong>Todas as rotas abaixo necessitam de login do administrador (Token)</Strong>
 
-2. GET http://localhost:3000/admin/pacientes - para listar pacientes do autocadastro
+GET http://localhost:3000/admin - pra gerar novos administradores automáticamente.
 
-3. GET http://localhost:3000/admin/medicos - para listar médicos do autocadastro
+GET http://localhost:3000/admin/pacientes - listar pacientes do autocadastro
 
-4. PUT http://localhost:3000/admin/ativar-medico/':id' - para mudar status de atividade um médico (muda ':id' pelo número de id do médico desejado)
+GET http://localhost:3000/admin/medicos - listar médicos do autocadastro
 
-5. PUT http://localhost:3000/admin/inativar-medico/':id' - para mudar status de atividade um médico (muda ':id' pelo número de id do médico desejado)
+PUT http://localhost:3000/admin/ativar-medico/':id' - mudar status de atividade um médico (muda ':id' pelo número de id do médico desejado)
 
-6. PUT http://localhost:3000/admin/inativar-medico/':id' - para mudar status de atividade um paciente (muda ':id' pelo número de id do paciente desejado)
+PUT http://localhost:3000/admin/inativar-medico/':id' - mudar status de atividade um médico (muda ':id' pelo número de id do médico desejado)
 
-7. GET http://localhost:3000/admin/transparencia - visualizar total de médicos 
+PUT http://localhost:3000/admin/inativar-medico/':id' - mudar status de atividade um paciente (muda ':id' pelo número de id do paciente desejado)
+
+GET http://localhost:3000/admin/transparencia - visualizar total de médicos 
 cadastrados, total de pacientes cadastrados no autocadastro, total de pacientes 
 cadastrados por médicos e total de médicos ativo/inativo.
 
+<h2>Autocadastro</h2>
+<h3>
+POST http://localhost:3000/cadastro-paciente - Cadastrar paciente
 
- 
+POST http://localhost:3000/cadastro-medico - Cadastrar médico
 
+<h2>Login</h2>
+
+POST http://localhost:3000/login - Todos os usuários usam a mesma rota.
+
+<h2>Médico</h2>
+
+POST http://localhost:3000/medico/add-meu-paciente - Adição de paciente pelo médico, requer login do médico (token)
+
+GET http://localhost:3000/medico/lista-meus-pacientes - Lista de pacientes, requer login do médico (token)
+
+<h2>Paciente</h2>
+<hr>
+POST http://localhost:3000/paciente/formClinico - Formulário clínico, requer login do paciente (token)
 
 
