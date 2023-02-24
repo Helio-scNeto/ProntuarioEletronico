@@ -2,9 +2,11 @@
 
 Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz do projeto, sem as aspas:
 
-1.'npm install'(instalar todas as dependências necessárias)
-2.'npx prisma migrate dev' (aplicar o esquema feito no prisma ao banco de dados)
-3.'npm run dev' (para de inicializar o servidor)
+<ol>
+    <li>1.'npm install'(instalar todas as dependências necessárias)</li>
+    <li>2.'npx prisma migrate dev' (aplicar o esquema feito no prisma ao banco de dados)</li>
+    <li>3.'npm run dev' (para de inicializar o servidor)</li>
+</ol>
 
 <hr>
 Feito os passos anteriores, a primeira ação que deve ser feita é a importação dos estados do 'file.csv' disponível. 
