@@ -23,7 +23,7 @@ Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz d
 
 <p>Na raiz do projeto, o arquivo <strong>SimulaçãoUser.json</strong> contém uma sugestão de Administrador, assim como de pacientes e médicos do autocadastro, e respostas para os formulários clínicos</p>
 
-<h6>Os tópicos abaixo estão separados de acordo com o utilizador, cada link é seguido de um método HTTP, e após o link há uma explicação simples do que cada rota deve fazer.</h6>
+<h6>Os tópicos abaixo estão separados de acordo com o utilizador, cada link é seguido de um método HTTP que deve ser empregado ao acessar a rota, após o link há uma explicação do que cada rota deve fazer.</h6>
 
 <h2>Administração</h2>
 
