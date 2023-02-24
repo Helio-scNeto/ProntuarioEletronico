@@ -16,13 +16,14 @@ Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz d
      <li>No body da requisição form-data ou similar o envio de arquivo, selecione o file.csv no diretório com key 'file', sem as aspas.</li>
 <li>Se bem sucedido a rota deve retornar um array contendo os objetos do modelo Estado.</li>
  </ol>
-
 <hr>
 <p>O primeiro Administrador (Superusuário do sistema) deve ser inserido manualmente no banco de dados ou através do terminal, com os campos CPF e Senha.</p>
 
 <p>Sinta-se livre pra utilizar o CPF que desejar, desde que seja válido, ou o sistema não permitirá a criação.</p>
 
 <p>Na raiz do projeto, o arquivo <strong>SimulaçãoUser.json</strong> contém uma sugestão de Administrador, assim como de pacientes e médicos do autocadastro, e respostas para os formulários clínicos</p>
+
+<h6>Os tópicos abaixo estão separados de acordo com o utilizador, cada link é seguido de um método HTTP, e após o link há uma explicação simples do que cada rota deve fazer.</h6>
 
 <h2>Administração</h2>
 
