@@ -10,8 +10,11 @@ Para inciar a aplicação, execute os 3 comandos abaixo em sequência, na raiz d
 Feito os passos anteriores, a primeira ação que deve ser feita é a importação dos estados do 'file.csv' disponível. 
 
 1: Acesse: http://localhost:3000/estados no Postman ou similar, utilizando método POST
+
 2. Use a raiz do projeto o mova o file.csv pra dentro do repositório atual do Postman
+
 3: No body da requisição form-data ou similar o envio de arquivo, selecione o file.csv no diretório com key 'file', sem as aspas.
+
 4: Se bem sucedido a rota deve retornar um array contendo os objetos do modelo Estado.
 <hr>
 O primeiro Administrador (Superusuário do sistema) deve ser feito via terminal ou deve ser inserido manualmente no banco de dados, com os campos CPF e Senha.
@@ -56,7 +59,6 @@ POST http://localhost:3000/medico/add-meu-paciente - Adição de paciente pelo m
 GET http://localhost:3000/medico/lista-meus-pacientes - Lista de pacientes, requer login do médico (token)
 
 <h2>Paciente</h2>
-<hr>
 POST http://localhost:3000/paciente/formClinico - Formulário clínico, requer login do paciente (token)
 
 
