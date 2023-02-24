@@ -19,9 +19,7 @@ Feito os passos anteriores, a primeira ação que deve ser feita é a importaç�
 <hr>
 O primeiro Administrador (Superusuário do sistema) deve ser feito via terminal ou deve ser inserido manualmente no banco de dados, com os campos CPF e Senha.
 
-Na raiz do projeto, o arquivo SimulaçãoUser.json contém uma sugestão de Administrador, mas sinta-se livre pra utilizar o CPF que desejar, desde que seja válido, ou o sistema não permitirá a criação. 
-
-Feito a criação do primeiro do primeiro Administrador, acesse:
+<p>Na raiz do projeto, o arquivo <strong>SimulaçãoUser.json</strong> contém uma sugestão de Administrador, assim como da pacientes, médicos e respostas dos formulário mas sinta-se livre pra utilizar o CPF que desejar, desde que seja válido, ou o sistema não permitirá a criação. </p>
 
 <h2>Administração</h2>
 
