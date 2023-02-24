@@ -40,7 +40,6 @@ cadastrados, total de pacientes cadastrados no autocadastro, total de pacientes
 cadastrados por médicos e total de médicos ativo/inativo.
 
 <h2>Autocadastro</h2>
-<h3>
 POST http://localhost:3000/cadastro-paciente - Cadastrar paciente
 
 POST http://localhost:3000/cadastro-medico - Cadastrar médico
